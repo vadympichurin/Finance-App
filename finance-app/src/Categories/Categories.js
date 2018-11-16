@@ -16,7 +16,7 @@ class Categories extends Component {
         // },
 
         inputValueName: '',
-        sum: 0,
+        sum: '',
         category: '',
         startDate: moment(),
         endDate: moment(),
@@ -97,6 +97,7 @@ class Categories extends Component {
     body: JSON.stringify({
         name: inputValueName,
         sum: inputValueSum,
+        category: '',
     }),
     headers: {
         Accept: 'application/json',
