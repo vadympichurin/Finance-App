@@ -4,15 +4,15 @@ const ctrlUsers = require('../controllers/user');
 
 router.get('/', ctrlUsers.getUsers);
 //
-router.get('/:id', ctrlUsers.getUser);
+router.get('/user/:id', ctrlUsers.getUser);
 // router.get('/budget/:id', (req, res) => {
     // res.send(req.params.id);
     // const {category = null} = req.query;
     // res.send(req.params)}
     // res.send(category)}
 // );
-router.get('/budget/:id', ctrlUsers.getCosts);
-// router.get('/:id/budget/:id', ctrlUsers.getCost);
+router.get('/budget/:id', ctrlUsers.getCost);
+router.get('/budget/', ctrlUsers.getCosts);
 
 router.post('/', ctrlUsers.addUser);
 //

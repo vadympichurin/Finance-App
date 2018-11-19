@@ -19,7 +19,7 @@ module.exports.addUser = function (data) {
 //
 module.exports.addCost = function (data) {
     let Cost = new Costs({
-        id: data.id,
+        userId: data.id,
         name: data.name,
         price: data.price,
         category: data.category,
@@ -32,5 +32,5 @@ module.exports.addCost = function (data) {
 module.exports.getUsers = () => Users.find();
 module.exports.getCosts = () => Costs.find();
 module.exports.getCostById = (bodyId) => Costs.find({"id": bodyId});
-module.exports.getCostCat = (cat) => Costs.find({"category": cat});
+// module.exports.getCostCat = (cat) => Costs.find({"category": cat});
 // module.exports.getCostByIdCat = (bodyId, cat) => Costs.find({"id": bodyId, "category": cat});
