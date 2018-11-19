@@ -5,7 +5,6 @@ import Table from '../Table/Table';
 import CalendarNew from '../Calendar/Calendar';
 import moment from 'moment';
 
-// let url = '/';
 
 class Categories extends Component {
     state = {
@@ -16,7 +15,7 @@ class Categories extends Component {
         // },
 
         inputValueName: '',
-        sum: '',
+        price: '',
         category: '',
         startDate: moment(),
         endDate: moment(),
@@ -51,7 +50,7 @@ class Categories extends Component {
           event.preventDefault();
           let obj = {
             name: this.state.inputValueName,
-            sum: this.state.sum,
+            price: this.state.price,
             category: this.state.category,
             startDate: moment(),
             endDate: moment(),
@@ -74,14 +73,13 @@ class Categories extends Component {
 
 
 //     componentDidMount() {
-//         axios.get(url)
+//         axios.get(`/budget/${id}?startDate=${this.state.startDate}&endDate={this.state.endDate}`)
 //            .then(response => response.ok ? response.json() : null)
-//         // .then(data => localStorage.setItem('period', JSON.stringify([data.period])))
+//         // .then(data => localStorage.setItem('period.id', JSON.stringify([data.period])))
 //         .then(data => {
 //         let result = JSON.parse(localStorage.getItem('period'));
 //         if (result) {
-//         result = result.filter(el => el.id >= 0 && el.id <= 50)
-        
+
 //             this.setState({
 //             userHistory: result,
 //             })
@@ -91,23 +89,23 @@ class Categories extends Component {
 //   )}
 
 
- addCategory = (inputValueName,inputValueSum) => {
-    fetch('https://test-users-api.herokuapp.com/users/', {
-    method: 'POST',
-    body: JSON.stringify({
-        name: inputValueName,
-        sum: inputValueSum,
-        category: '',
-    }),
-    headers: {
-        Accept: 'application/json',
-        "Content-type": 'application/json',
-    }
-    }   
-    ).then(result => result.ok ? result.json() : null)
-    .then(data => console.log(data))
-    .catch(error =>console.log(error))
-}
+//  addCategory = (inputValueName,inputValueSum) => {
+//     fetch('https://test-users-api.herokuapp.com/users/', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//         name: inputValueName,
+//         price: inputValueSum,
+//         category: '',
+//     }),
+//     headers: {
+//         Accept: 'application/json',
+//         "Content-type": 'application/json',
+//     }
+//     }   
+//     ).then(result => result.ok ? result.json() : null)
+//     .then(data => console.log(data))
+//     .catch(error =>console.log(error))
+// }
 
  removeCategory = (id) => {
     fetch(`https://test-users-api.herokuapp.com/users/${id}`, {
@@ -121,7 +119,7 @@ class Categories extends Component {
  updateUser = (id, inputValueName, inputValueSum) => {
     fetch(`https://test-users-api.herokuapp.com/users/${id}`, {
         method: "PUT",
-        body: JSON.stringify({name: inputValueName, sum: inputValueSum}),
+        body: JSON.stringify({name: inputValueName, price: inputValueSum}),
         headers: {
             'Content-Type': 'application/json',
         }
@@ -138,18 +136,21 @@ class Categories extends Component {
         <div className='form_categories'>
          <form onSubmit={this.addTask}>
         <input name='inputValueName' type='text' className='category_title' placeholder='Название' onChange={this.inputChange} value={this.state.inputValueName}/>
-         <input name='sum' type='text' className='category_sum' placeholder='Сумма' onChange={this.inputChange} value={this.state.sum}/>
+         <input name='price' type='text' className='category_sum' placeholder='Сумма' onChange={this.inputChange} value={this.state.price}/>
         <select name='category'className='category_select' onChange={this.inputChange} value={this.state.category}>
          <option>Категория</option>
             <option value='ком_услуги'>Ком.услуги</option>
             <option value='питание'>Питание</option>
+            <option value='транспорт'>Транспорт</option>
+            <option value='здоровье'>Здоровье</option>
+            <option value='досуг'>Досуг</option>
             <option value='разное'>Разное</option>
          </select>
          <button className='btn_add_info' type="submit">Добавить</button>
          </form>
          </div>
         <div className='category_table'>
-             {this.state.userHistory.map(el => <Table id={el.id} name={el.name} sum={el.sum} category={el.category}/>)}
+             {this.state.userHistory.map(el => <Table id={el.id} name={el.name} price={el.price} category={el.category} updateUser={this.updateUser} removeCategory={this.removeCategory}/>)}
         </div>
         </div>
     )
