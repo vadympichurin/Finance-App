@@ -6,7 +6,7 @@ import App from './App';
 import  UserContextProvider  from './UserContext'
 // import registerServiceWorker from './registerServiceWorker';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 
 import { Provider } from 'react-redux';

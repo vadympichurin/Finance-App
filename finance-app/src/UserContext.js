@@ -37,7 +37,8 @@ export default class UserContextProvider extends Component {
             isLogged: false,
             email: null,
             password: null,
-            passwordRepeat: null
+            passwordRepeat: null,
+            
         })
     }
 
@@ -50,6 +51,9 @@ export default class UserContextProvider extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.onLogin(this.state);
+        // this.setState({
+        //     isLogged: true,
+        // })
     };
 
     onRegister = e => {
@@ -81,6 +85,7 @@ export default class UserContextProvider extends Component {
                  password: this.state.password,
                  passwordRepeat: this.state.passwordRepeat,
                  error: this.state.error,
+                 id: this.state.id,
 
              },
              onLogin: this.onLogin,

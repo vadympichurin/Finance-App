@@ -15,7 +15,14 @@ class App extends Component {
       <div className="App">
       <BrowserRouter>
       <Switch>
-        <Route exact path='/' render={props => <Login {...props}/>}/>
+        {/* <Route exact path='/' render={props => <Login {...props}/>}/> */}
+        
+        <Route exact path='/' render={(props) => (
+          this.context.user.isLogged ? ( <Redirect to='/dashbord'/>) : (
+            <Login {...props}/>
+          )
+        )}/>
+        
         {/* <Route path='/Registration' render={props => <Registration {...props}/>}/> */}
         <Route path="/Registration" render={(props) => (
   this.context.user.isLogged ? (
