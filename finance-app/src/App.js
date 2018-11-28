@@ -14,25 +14,23 @@ class App extends Component {
     console.log(this.context.user.isLogged);
     return (
       <div className="App">
-      <Categories/>
       <BrowserRouter>
       <Switch>
         {/* <Route exact path='/' render={props => <Login {...props}/>}/> */}
         
         <Route exact path='/' render={(props) => (
-          this.context.user.isLogged ? ( <Redirect to='/dashbord'/>) : (
-            <Login {...props}/>
-          )
-        )}/>
-        
-        {/* <Route path='/Registration' render={props => <Registration {...props}/>}/> */}
+          localStorage.getItem('isLogged') ? ( <Redirect to='/dashboard'/>) : (<Login {...props}/>))}/>
         <Route path="/Registration" render={(props) => (
-  this.context.user.isLogged ? (
-    <Redirect to="/dashboard"/>
-  ) : (
-    <Registration {...props}/>
-    )
-)}/>
+            localStorage.getItem('isLogged') ? (<Redirect to="/dashboard"/>) : (<Registration {...props}/>))}/>
+        <Route path="/dashboard" render={(props) => (
+            localStorage.getItem('isLogged') ? (<Categories/>) : (<Redirect to='/'/>))}/>
+        {/*<Route exact path='/' render={(props) => (*/}
+          {/*this.context.user.isLogged ? ( <Redirect to='/dashboard'/>) : (<Login {...props}/>))}/>*/}
+
+        {/* <Route path='/Registration' render={props => <Registration {...props}/>}/> */}
+        {/*<Route path="/Registration" render={(props) => (this.context.user.isLogged ? (<Redirect to="/dashboard"/>) : (<Registration {...props}/>))}/>*/}
+        {/*<Route path="/dashboard" render={(props) => (this.context.user.isLogged ? (<Categories/>) : (<Redirect to='/'/>))}/>*/}
+
       </Switch>
       </BrowserRouter>
       </div>

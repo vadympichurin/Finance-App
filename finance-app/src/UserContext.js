@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import React, {Component, createContext} from 'react';
 import axios from 'axios';
 
 export const UserContext = createContext({
@@ -24,21 +24,35 @@ export default class UserContextProvider extends Component {
     };
 
     onLogin = credentials => {
-     axios.post('#')  
-     .then(info => this.setState({
-         email: info.data.user.email,
-         password: info.data.user.password 
-     }))
-     .catch(err => console.log(err))
+        axios.get(`http://localhost:3001/api/log/${this.state.email}?password=${this.state.password}`)
+        // .then(function(res){ console.log(res) })
+        // .catch(function(res){ console.log(res) })
+        //     .then(info => console.log(info.data))
+            .then(info => {
+                let id = localStorage.getItem("id")
+                // if (id !== info.data.map(el => el._id))
+                localStorage.setItem("id", info.data.map(el => el._id));
+                localStorage.setItem("isLogged", true);
+                this.setState({
+                    id: localStorage.getItem("id"),
+                    isLogged: true
+                })
+
+            })
+
+            .catch(err => console.log(err))
     }
 
-    onLogout =()=> {
+    onLogout = (e) => {
+        localStorage.setItem("id", "");
+        localStorage.setItem("isLogged", "");
+        localStorage.setItem("period", []);
         this.setState({
             isLogged: false,
             email: null,
             password: null,
             passwordRepeat: null,
-            
+
         })
     }
 
@@ -58,14 +72,31 @@ export default class UserContextProvider extends Component {
 
     onRegister = e => {
         e.preventDefault();
-{this.state.password === this.state.passwordRepeat ?
-    this.setState({
-        isLogged: true,
-        error: false
-    })
- : this.setState({
-    error: true,
-})};
+        if (this.state.password === this.state.passwordRepeat) {
+            axios.post('http://localhost:3001/api/reg', {
+                login: this.state.email,
+                email: this.state.email,
+                password: this.state.password
+            })
+            // .then(function(res){ console.log(res) })
+            // .catch(function(res){ console.log(res) })
+            //     .then(info => console.log(info.data))
+                .then(info => {
+                    console.log(info.data)
+                    localStorage.setItem("id", info.data._id);
+                    localStorage.setItem("isLogged", true);
+                    this.setState({
+                        id: localStorage.getItem("id"),
+                        isLogged: true,
+                        error: false
+                    })
+
+                })
+                .catch(err => console.log(err))
+        } else {
+            this.setState({
+                error: true,
+            })}
 
 // axios.post('#', {email: this.state.email, password: this.state.password} )
 // .then(info => this.setState({
@@ -77,25 +108,25 @@ export default class UserContextProvider extends Component {
 
     render() {
         return (
-         <UserContext.Provider
-         value={{
-             user: {
-                 isLogged: this.state.isLogged,
-                 email: this.state.email,
-                 password: this.state.password,
-                 passwordRepeat: this.state.passwordRepeat,
-                 error: this.state.error,
-                 id: this.state.id,
+            <UserContext.Provider
+                value={{
+                    user: {
+                        isLogged: this.state.isLogged,
+                        email: this.state.email,
+                        password: this.state.password,
+                        passwordRepeat: this.state.passwordRepeat,
+                        error: this.state.error,
+                        id: this.state.id,
 
-             },
-             onLogin: this.onLogin,
-             onLogout: this.onLogout,
-             onRegister: this.onRegister,
-             handleChange: this.handleChange,
-             handleSubmit: this.handleSubmit,
-         }}>
-         {this.props.children}
-         </UserContext.Provider>  
+                    },
+                    onLogin: this.onLogin,
+                    onLogout: this.onLogout,
+                    onRegister: this.onRegister,
+                    handleChange: this.handleChange,
+                    handleSubmit: this.handleSubmit,
+                }}>
+                {this.props.children}
+            </UserContext.Provider>
         );
     }
 }

@@ -26,6 +26,12 @@ border-bottom: 1px solid #dedede;
     border-radius: 10%;
 }
 
+.btn_logout {
+background-color: #ff5755;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
 .content_btn {
     display: flex;
     justify-content: flex-end;
