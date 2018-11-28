@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let costSchema = new Schema ({
-    userId: {
+    id: {
       type: String,
       required: true,
     },
@@ -22,11 +22,6 @@ let costSchema = new Schema ({
         type: Date,
         required: true,
     },
-    // endDate: {
-    //     type: Date,
-    //     required: true,
-    // },
-
 })
 
 const Cost = mongoose.model('Cost', costSchema);

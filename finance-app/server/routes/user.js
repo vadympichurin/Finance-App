@@ -4,18 +4,22 @@ const ctrlUsers = require('../controllers/user');
 
 router.get('/', ctrlUsers.getUsers);
 //
-router.get('/user/:id', ctrlUsers.getUser);
+router.get('/log/:email', ctrlUsers.Login);
+// router.get('/man/:email', (req,res) => {res.send(console.log(req.data))});
 // router.get('/budget/:id', (req, res) => {
     // res.send(req.params.id);
     // const {category = null} = req.query;
     // res.send(req.params)}
     // res.send(category)}
 // );
-router.get('/budget/:id', ctrlUsers.getCost);
-router.get('/budget/', ctrlUsers.getCosts);
+// router.get('/budget/:id', (req,res) => (res.send(console.log(req.params.id))));
+router.get('/budget/:id', ctrlUsers.getCosts);
+// router.get('/:id/budget/:id', ctrlUsers.getCost);
 
-router.post('/', ctrlUsers.addUser);
+// router.post('/', (req,res) => (res.send(console.log(req.body))));
+router.post('/reg', ctrlUsers.addUser);
 //
+// router.post('/budget/', (req,res) => res.send(console.log(req.body)));
 router.post('/budget/', ctrlUsers.addCost);
 //
 // router.get('/budget/:id', ctrlUsers.getCost);

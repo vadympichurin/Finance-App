@@ -31,17 +31,17 @@ app.use((req, res, next) => {
 
     next();
 });
-
-// app.use(express.static(path.join(__dirname,'../build')));
-
-app.use('/api/user', routerUsers);
-
-// app.get('/', (req,res) => res.send("Hello!") );
-
-app.get('/', function (req, res, next) {
-    res.sendFile(path.join(__dirname,'../build/index.html'));
-})
-
+//
+// // app.use(express.static(path.join(__dirname,'../build')));
+//
+app.use('/api/', routerUsers);
+//
+app.get('/', (req,res) => res.send("Hello!") );
+//
+// app.get('/', function (req, res, next) {
+//     res.sendFile(path.join(__dirname,'../build/index.html'));
+// })
+//
 app.use((req, res, next) => {
   res
     .status(404)
