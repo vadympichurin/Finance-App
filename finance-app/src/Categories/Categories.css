@@ -1,0 +1,40 @@
+.category_title, .category_sum {
+    border: none;
+}
+
+.category_select, .category_period {
+    border: none;
+    margin-right: 58px;
+}
+
+.form_categories {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.category_title, .category_sum, .category_select, .category_period  {
+border-bottom: 1px solid #dedede;
+}
+
+.btn_add_info {
+    padding: 10px;
+    background-color: #ff5722;
+    color: #ffffff;
+    border: none;
+    border-radius: 10%;
+}
+
+.btn_logout {
+background-color: #ff5755;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.content_btn {
+    display: flex;
+    justify-content: flex-end;
+    width: 70%;
+    margin-top: 20px;
+}
